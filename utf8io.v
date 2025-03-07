@@ -16,6 +16,7 @@ pub fn (mut u Utf8io) close() {
 	u.f.close()
 }
 
+
 fn main() {
 	mut u := Utf8io{}
 	u.f = u.open('../m.dat')!
