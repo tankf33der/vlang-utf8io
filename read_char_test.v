@@ -19,9 +19,9 @@ fn test_five() {
 	u.open('./testdata/five.dat')
 	mut ch := []u8{}
 	mut res := []u8{}
-	for _ in 0 .. 7 {
+	for {
 		ch = u.read_char()!
-		if u.eof == true { break }
+		if u.eof { break }
 		res << ch
 	}
 	assert u.eof
