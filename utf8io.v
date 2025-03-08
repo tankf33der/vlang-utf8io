@@ -56,7 +56,8 @@ fn main() {
 		if c.len == 0 {
 			break
 		}
-		println('read:|${c}|')
+		fl := c.is_blank()
+		println('read:|${c}|${fl}')
 		// println('end')
 	}
 }
