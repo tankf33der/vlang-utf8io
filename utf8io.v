@@ -43,18 +43,19 @@ pub fn (mut u Utf8io) close() {
 fn main() {
 	mut u := Utf8io{}
 	// mut res := []u8{cap: 4}
-	u.open('../m.dat')
+	u.open('../m2.dat')
 	defer { u.close() }
 
-	mut c := u.peek_char()!
-	println('|${c}|')
+	mut c := ''
+	for {
+		// println('start')
+		//c = u.peek_char()!
+		// if c.len == 0 { break }
+		// println('peek:|${c}|')
 
-	u.read_char()!
-	c = u.peek_char()!
-	println('|${c}:${c.len}|')
-
-	u.read_char()!
-	c = u.peek_char()!
-	println('|${c}:${c.len}|')
-
+		c = u.read_char()!
+		if c.len == 0 { break }
+		println('read:|${c}|')
+		// println('end')
+	}
 }
