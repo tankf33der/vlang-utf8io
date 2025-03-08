@@ -43,21 +43,21 @@ pub fn (mut u Utf8io) read_char() ![]u8 {
 	return res
 }
 
-/*
+// TODO: finish Windows EOL
 pub fn (mut u Utf8io) read_line() ![]u8 {
 	mut res := []u8{}
 	for {
-		ch := u.read_char() or { break }
-		println(ch)
-		if ch.len == 0 || ch[0] == 10 || ch[0] == 13 {
+		ch := u.read_char()!
+		if u.eof || ch[0] == 10 {
 			break
 		}
 		res << ch
 	}
+	if !u.eof {
+		u.read_char()!
+	}
 	return res
 }
-*/
-
 
 pub fn (mut u Utf8io) close() {
 	u.f.close()
