@@ -29,3 +29,19 @@ fn test_five() {
 	u.close()
 	unsafe { u.free() }
 }
+
+fn test_twolines() {
+	mut u := utf8io.Utf8io{}
+	u.open('./testdata/twolines.dat')
+	mut res := []u8{}
+	for {
+		if u.eof { break }
+		res << u.read_char()!
+	}
+	assert u.eof
+	assert res == [u8(97),98,99,10,65,66,67]
+	u.close()
+	unsafe { u.free() }
+
+
+}

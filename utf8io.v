@@ -53,9 +53,6 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 		}
 		res << ch
 	}
-	if !u.eof {
-		u.read_char()!
-	}
 	return res
 }
 
