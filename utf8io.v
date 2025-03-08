@@ -1,11 +1,10 @@
 // module utf8io
-
 import os
 
 pub struct Utf8io {
 pub mut:
-	f	os.File
-	pos	u64
+	f   os.File
+	pos u64
 }
 
 pub fn (mut u Utf8io) open(path string) {
@@ -16,7 +15,7 @@ pub fn (mut u Utf8io) peek_char() !string {
 	mut res := []u8{}
 	res << u.f.read_u8() or { return res.bytestr() }
 	count := utf8_char_len(res[0])
-	for _ in 0..count-1 {
+	for _ in 0 .. count - 1 {
 		res << u.f.read_u8()!
 	}
 	defer {
@@ -30,7 +29,7 @@ pub fn (mut u Utf8io) read_char() !string {
 	res << u.f.read_u8() or { return res.bytestr() }
 	count := u64(utf8_char_len(res[0]))
 	u.pos += count
-	for _ in 0..count-1 {
+	for _ in 0 .. count - 1 {
 		res << u.f.read_u8()!
 	}
 	return res.bytestr()
@@ -49,12 +48,14 @@ fn main() {
 	mut c := ''
 	for {
 		// println('start')
-		//c = u.peek_char()!
+		// c = u.peek_char()!
 		// if c.len == 0 { break }
 		// println('peek:|${c}|')
 
 		c = u.read_char()!
-		if c.len == 0 { break }
+		if c.len == 0 {
+			break
+		}
 		println('read:|${c}|')
 		// println('end')
 	}
