@@ -1,9 +1,12 @@
 module utf8io
 
-fn test_peek() {
+fn test_zerobytes() {
 	mut u := utf8io.Utf8io{}
-	u.open('./testdata/zero.dat')
-	println(u.read_char()!)
+	u.open('./testdata/one.dat')
+	for _ in 0..16 {
+		u.peek_char()!
+	}
+	assert [u8(97)] == u.peek_char()!
 	u.close()
 	unsafe { u.free() }
 }
