@@ -2,7 +2,7 @@
 import os
 
 pub struct Utf8io {
-pub mut:
+mut:
 	f   os.File
 	pos u64
 }
