@@ -1,6 +1,9 @@
 module utf8io
 
 fn test_peek() {
-	u := utf8io.Utf8io{}
+	mut u := utf8io.Utf8io{}
+	u.open('./testdata/EOF.dat')
+	println(u.peek_char()!)
+	u.close()
 	unsafe { u.free() }
 }
