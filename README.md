@@ -1,6 +1,7 @@
-Great and the only PicoLisp language has simple and robust IO for reading from file(s).
+Great and the only PicoLisp language has simple and robust IO for reading from file.
 
 Lets implement API on Vlang:
+
 ```v
 module tankf33der.utf8io
 
