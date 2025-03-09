@@ -75,13 +75,32 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 	mut res := []u8{}
 	patt_bytes := to_arrays(pattern)
+again:
 	for {
 		ch := u.peek_char()!
-		if u.f.eof() || ch == patt_bytes[0] {
+		if ch.len == 0 || ch == patt_bytes[0] {
 			break
 		}
 		res << u.read_char()!
 	}
+	if u.f.eof() {
+		unsafe { goto exit }
+	}
+	pos_loop := u.f.tell()!
+	mut again_flag := false
+	for p in patt_bytes {
+		ch := u.read_char()!
+		if ch.len == 0 || p != ch {
+			again_flag = true
+			break
+		}
+	}
+	u.f.seek(pos_loop, .start)!
+	if again_flag {
+		res << u.read_char()!
+		unsafe { goto again }
+	}
+exit:
 	return res
 }
 
