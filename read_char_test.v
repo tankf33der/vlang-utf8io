@@ -1,5 +1,27 @@
 module utf8io
 
+fn test_peek_zero() {
+	mut u := Utf8io{}
+	u.open('./testdata/zero.dat')
+
+	ch := u.peek_char()!
+	assert ch.len == 0
+	assert u.eof
+
+	u.close()
+	unsafe { u.free() }
+}
+
+fn test_read_zero() {
+	mut u := Utf8io{}
+	u.open('./testdata/zero.dat')
+	ch := u.read_char()!
+	assert ch.len == 0
+	assert u.eof
+	u.close()
+	unsafe { u.free() }
+}
+
 fn test_one() {
 	mut u := Utf8io{}
 	u.open('./testdata/one.dat')
