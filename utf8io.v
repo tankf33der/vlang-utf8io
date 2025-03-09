@@ -15,7 +15,19 @@ mut:
 }
 
 pub fn to_arrays(pattern string) [][]u8 {
-	res := [][]u8{}
+	mut res := [][]u8{}
+	mut start := 0
+	patt_bytes := pattern.bytes()
+	if pattern.len > 0 {
+		for {
+			// protection
+			if start == pattern.len { break }
+			// work
+			count := utf8_char_len(pattern[start])
+			res << patt_bytes[start .. start+count]
+			start += count
+		}
+	}
 	return res
 }
 
