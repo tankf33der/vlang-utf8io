@@ -41,3 +41,23 @@ fn test_read_from3_1() {
 	assert res.bytestr() == ':'
 	u.close()
 }
+
+fn test_read_from4_1() {
+	mut u := Utf8io{}
+	u.open('./testdata/readfrom4.dat')
+	res := u.read_from('val=\'')!
+	assert res.bytestr() == 'val=\''
+	assert u.peek_char()!.bytestr() == 'a'
+	assert u.read_till('\'')!.bytestr() == 'abc'
+	u.close()
+}
+
+fn test_read_from5_1() {
+	mut u := Utf8io{}
+	u.open('./testdata/readfrom5.dat')
+	res := u.read_from('.')!
+	assert res.bytestr() == '.'
+	assert u.read_char()!.bytestr() == 'c'
+	assert u.read_till(':')!.bytestr() == 'd'
+	u.close()
+}
