@@ -10,7 +10,7 @@ pub struct Utf8io {
 mut:
 	f   os.File
 	eof bool
-	pos u64
+	// pos u64
 }
 
 pub fn to_arrays(pattern string) [][]u8 {
@@ -49,9 +49,7 @@ fn (mut u Utf8io) one_char(seek_flag bool) ![]u8 {
 	}
 	defer {
 		if seek_flag {
-			u.f.seek(u.pos, .start) or { panic('seek failed') }
-		} else {
-			u.pos += count
+			u.f.seek(-count, .current) or { panic('seek failed') }
 		}
 	}
 	return res
@@ -80,14 +78,14 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 	mut res := []u8{}
 	patt_bytes := to_arrays(pattern)
-	println(patt_bytes)
 	for {
-		ch := u.read_char()!
+		ch := u.peek_char()!
 		if u.eof || ch == patt_bytes[0] {
 			break
 		}
-		res << ch
+		res << u.read_char()!
 	}
+
 	return res
 }
 
