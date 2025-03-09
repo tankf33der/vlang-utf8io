@@ -77,18 +77,19 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 	return res
 }
 
-/*
 pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 	mut res := []u8{}
+	patt_bytes := utf8io.to_arrays(pattern)
 	for {
 		ch := u.read_char()!
-		if u.eof {
+		if u.eof || ch == patt_bytes[0] {
 			break
 		}
 		res << ch
 	}
+
+	return res
 }
-*/
 
 pub fn (mut u Utf8io) close() {
 	u.f.close()

@@ -33,5 +33,5 @@ fn test_to_arrays_utf8_combo1() {
 
 fn test_to_arrays_utf8_combo2() {
 	res := utf8io.to_arrays(' мisа')
-	assert res == [[u8(32)], [u8(208), 188], [u8(105)], [u8(115)], [u8(208), 176]]
+	assert res == [[u8(32)], [u8(208), 188], [u8(105)], [u8(115)], [u8(208, 176]]
 }
