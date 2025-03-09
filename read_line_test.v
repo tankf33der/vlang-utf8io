@@ -10,21 +10,18 @@ fn test_read_line() {
 	unsafe { u.free() }
 }
 
-
-// FIXME
-/*
 fn test_twoline() {
 	mut u := Utf8io{}
 	u.open('./testdata/twolines.dat')
 	mut lines := []u8{}
 	for {
-		if u.eof {
+		l := u.read_line()!
+		if l.len == 0 {
 			break
 		}
-		lines << u.read_line()!
+		lines << l
 	}
 	assert lines == [u8(97), 98, 99, 65, 66, 67]
 	u.close()
 	unsafe { u.free() }
 }
-*/
