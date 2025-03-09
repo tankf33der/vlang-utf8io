@@ -1,5 +1,13 @@
 module utf8io
 
+fn test_read_till0_1() {
+	mut u := Utf8io{}
+	u.open('./testdata/readtill0.dat')
+	res := u.read_till(':')!
+	assert res == [u8(97), 98, 99, 100, 101, 102]
+	u.close()
+}
+
 fn test_read_till1_1() {
 	mut u := Utf8io{}
 	u.open('./testdata/readtill1.dat')
