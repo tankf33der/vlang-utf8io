@@ -82,7 +82,6 @@ pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 		}
 		res << u.read_char()!
 	}
-
 	return res
 }
 
