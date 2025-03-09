@@ -31,8 +31,6 @@ fn test_one() {
 	unsafe { u.free() }
 }
 
-// FIXME
-/*
 fn test_five() {
 	mut u := Utf8io{}
 	u.open('./testdata/five.dat')
@@ -40,7 +38,7 @@ fn test_five() {
 	mut res := []u8{}
 	for {
 		ch = u.read_char()!
-		if u.eof {
+		if ch.len == 0 {
 			break
 		}
 		res << ch
@@ -49,22 +47,19 @@ fn test_five() {
 	u.close()
 	unsafe { u.free() }
 }
-*/
 
-// FIXME
-/*
 fn test_twolines() {
 	mut u := Utf8io{}
 	u.open('./testdata/twolines.dat')
 	mut res := []u8{}
 	for {
-		if u.eof {
+		ch := u.read_char()!
+		if ch.len == 0 {
 			break
 		}
-		res << u.read_char()!
+		res << ch
 	}
 	assert res == [u8(97), 98, 99, 10, 65, 66, 67]
 	u.close()
 	unsafe { u.free() }
 }
-*/
