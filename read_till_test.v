@@ -59,3 +59,20 @@ fn test_read_till2_3() {
 		58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 100, 101, 102, 10]
 	u.close()
 }
+
+fn test_read_till3_1() {
+	mut u := Utf8io{}
+	u.open('./testdata/readtill3.dat')
+	res := u.read_till(';')!
+	assert res == [u8(208), 188, 208, 184, 209, 136, 208, 176, 58, 58, 208, 188, 208, 176, 209, 136, 208, 176]
+	u.close()
+}
+
+fn test_read_till3_2() {
+	mut u := Utf8io{}
+	u.open('./testdata/readtill3.dat')
+	res := u.read_till(':')!
+	assert res == [u8(208), 188, 208, 184, 209, 136, 208, 176]
+	assert res.bytestr() == 'миша'
+	u.close()
+}
