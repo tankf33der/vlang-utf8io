@@ -61,3 +61,13 @@ fn test_read_from5_1() {
 	assert u.read_till(':')!.bytestr() == 'd'
 	u.close()
 }
+
+fn test_read_from5_2() {
+	mut u := Utf8io{}
+	u.open('./testdata/readfrom5.dat')
+	res := u.read_from('.')!
+	assert res.bytestr() == '.'
+	assert u.read_char()!.bytestr() == 'c'
+	assert u.read_till('...............................')!.bytestr() == 'd:ef\n'
+	u.close()
+}
