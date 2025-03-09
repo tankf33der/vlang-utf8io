@@ -92,13 +92,13 @@ pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 	mut again_flag := false
 	for p in patt_bytes {
 		ch := u.read_char()!
-		if ch.len == 0 || p != ch {
+		if p != ch {
 			again_flag = true
 			break
 		}
 	}
 	u.f.seek(pos_loop, .start)!
-	if again_flag {
+	if again_flag {			// not equal
 		res << u.read_char()!
 		unsafe {
 			goto again
@@ -110,29 +110,34 @@ pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 
 pub fn (mut u Utf8io) read_from(pattern string) ![]u8 {
 	mut res := []u8{}
+	mut last_len := 0
 	patt_bytes := to_arrays(pattern)
 again:
 	for {
 		ch := u.read_char()!
+		last_len = ch.len
 		if ch.len == 0 || ch == patt_bytes[0] {
 			break
 		}
-		res << ch
 	}
 	if u.f.eof() {
 		unsafe {
 			goto exit
 		}
 	}
+	u.f.seek(-last_len, .current)!
+
 	mut again_flag := false
 	for p in patt_bytes {
 		ch := u.read_char()!
-		if ch.len == 0 || p != ch {
+		if p != ch {
 			again_flag = true
 			break
 		}
+		res << ch
 	}
-	if again_flag {
+	if again_flag {		// not eqaul
+		res.clear()
 		unsafe {
 			goto again
 		}
