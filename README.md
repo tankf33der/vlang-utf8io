@@ -2,7 +2,7 @@ Great and the only PicoLisp language has simple and robust IO from reading from 
 
 Lets implement API on Vlang:
 ```v
-module utf8io
+module tankf33der.utf8io
 
 struct Utf8io {
 mut:
