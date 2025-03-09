@@ -1,5 +1,6 @@
 // TODO:
 // o) add Windows EOL support
+// o) remove goto
 
 module utf8io
 
