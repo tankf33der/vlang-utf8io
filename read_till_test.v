@@ -6,8 +6,7 @@ fn test_read_till1() {
 
 	res := u.read_till(':')!
 	println(res)
-	println(peek_char()!)
-
+	println(u.read_char()!)
 
 	u.close()
 }
