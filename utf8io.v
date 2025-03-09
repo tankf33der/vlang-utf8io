@@ -7,7 +7,7 @@ import os
 
 pub struct Utf8io {
 mut:
-	f   os.File
+	f os.File
 }
 
 pub fn to_arrays(pattern string) [][]u8 {
@@ -75,8 +75,8 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 	mut res := []u8{}
 	patt_bytes := to_arrays(pattern)
-again:
-	for {
+
+	again: for {
 		ch := u.peek_char()!
 		if ch.len == 0 || ch == patt_bytes[0] {
 			break
@@ -84,7 +84,9 @@ again:
 		res << u.read_char()!
 	}
 	if u.f.eof() {
-		unsafe { goto exit }
+		unsafe {
+			goto exit
+		}
 	}
 	pos_loop := u.f.tell()!
 	mut again_flag := false
@@ -98,9 +100,11 @@ again:
 	u.f.seek(pos_loop, .start)!
 	if again_flag {
 		res << u.read_char()!
-		unsafe { goto again }
+		unsafe {
+			goto again
+		}
 	}
-exit:
+	exit:
 	return res
 }
 
