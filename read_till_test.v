@@ -33,3 +33,27 @@ fn test_read_till1_4() {
 	assert res == [u8(97), 98, 99, 58, 100, 101, 102, 10]
 	u.close()
 }
+
+fn test_read_till2_1() {
+	mut u := Utf8io{}
+	u.open('./testdata/readtill2.dat')
+	res := u.read_till(':::::::::::::::::::::::::::')!
+	assert res == [u8(97), 98, 99]
+	u.close()
+}
+
+fn test_read_till2_2() {
+	mut u := Utf8io{}
+	u.open('./testdata/readtill2.dat')
+	res := u.read_till(':::::::::::::::::::::::::::;')!
+	assert res == [u8(97), 98, 99, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 100, 101, 102, 10]
+	u.close()
+}
+
+fn test_read_till2_3() {
+	mut u := Utf8io{}
+	u.open('./testdata/readtill2.dat')
+	res := u.read_till('::::::::::::::::::::::::::::;')!
+	assert res == [u8(97), 98, 99, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 58, 100, 101, 102, 10]
+	u.close()
+}
