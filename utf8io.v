@@ -80,6 +80,7 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 	mut res := []u8{}
 	patt_bytes := utf8io.to_arrays(pattern)
+	println(patt_bytes)
 	for {
 		ch := u.read_char()!
 		if u.eof || ch == patt_bytes[0] {
