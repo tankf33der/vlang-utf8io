@@ -1,9 +1,9 @@
 module utf8io
 
 fn test_one() {
-	mut u := utf8io.Utf8io{}
+	mut u := Utf8io{}
 	u.open('./testdata/one.dat')
-	for _ in 0..16 {
+	for _ in 0 .. 16 {
 		u.peek_char()!
 	}
 	assert u.read_char()! == [u8(97)]
@@ -15,13 +15,15 @@ fn test_one() {
 }
 
 fn test_five() {
-	mut u := utf8io.Utf8io{}
+	mut u := Utf8io{}
 	u.open('./testdata/five.dat')
 	mut ch := []u8{}
 	mut res := []u8{}
 	for {
 		ch = u.read_char()!
-		if u.eof { break }
+		if u.eof {
+			break
+		}
 		res << ch
 	}
 	assert u.eof
@@ -31,17 +33,17 @@ fn test_five() {
 }
 
 fn test_twolines() {
-	mut u := utf8io.Utf8io{}
+	mut u := Utf8io{}
 	u.open('./testdata/twolines.dat')
 	mut res := []u8{}
 	for {
-		if u.eof { break }
+		if u.eof {
+			break
+		}
 		res << u.read_char()!
 	}
 	assert u.eof
-	assert res == [u8(97),98,99,10,65,66,67]
+	assert res == [u8(97), 98, 99, 10, 65, 66, 67]
 	u.close()
 	unsafe { u.free() }
-
-
 }

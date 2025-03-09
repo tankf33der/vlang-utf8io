@@ -1,7 +1,7 @@
 module utf8io
 
 fn test_read_till1() {
-	mut u := utf8io.Utf8io{}
+	mut u := Utf8io{}
 	u.open('./testdata/readtill1.dat')
 
 	res := u.read_till(':')!
