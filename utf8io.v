@@ -1,12 +1,22 @@
+// TODO:
+// o) add inline
+// o) add Windows EOL support
+
 module utf8io
 
 import os
+
 
 pub struct Utf8io {
 mut:
 	f   os.File
 	eof bool
 	pos u64
+}
+
+pub fn to_arrays(pattern string) [][]u8 {
+	res := [][]u8{}
+	return res
 }
 
 pub fn (mut u Utf8io) open(path string) {
@@ -43,7 +53,6 @@ pub fn (mut u Utf8io) read_char() ![]u8 {
 	return res
 }
 
-// TODO: finish Windows EOL
 pub fn (mut u Utf8io) read_line() ![]u8 {
 	mut res := []u8{}
 	for {
@@ -55,6 +64,19 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 	}
 	return res
 }
+
+/*
+pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
+	mut res := []u8{}
+	for {
+		ch := u.read_char()!
+		if u.eof {
+			break
+		}
+		res << ch
+	}
+}
+*/
 
 pub fn (mut u Utf8io) close() {
 	u.f.close()
