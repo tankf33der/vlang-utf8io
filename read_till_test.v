@@ -76,3 +76,11 @@ fn test_read_till3_2() {
 	assert res.bytestr() == 'миша'
 	u.close()
 }
+
+fn test_read_till4_1() {
+	mut u := Utf8io{}
+	u.open('./testdata/readtill4.dat')
+	res := u.read_till(':')!
+	assert res == []
+	u.close()
+}
