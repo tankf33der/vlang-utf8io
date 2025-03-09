@@ -75,7 +75,6 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 	mut res := []u8{}
 	patt_bytes := to_arrays(pattern)
-
 	again: for {
 		ch := u.peek_char()!
 		if ch.len == 0 || ch == patt_bytes[0] {
