@@ -8,7 +8,6 @@ import os
 pub struct Utf8io {
 mut:
 	f   os.File
-	// eof bool
 }
 
 pub fn to_arrays(pattern string) [][]u8 {
