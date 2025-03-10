@@ -64,7 +64,7 @@ pub fn (mut u Utf8io) read_line() ![]u8 {
 	mut res := []u8{}
 	for {
 		ch := u.read_char()!
-		if u.f.eof() || ch[0] == 10 {
+		if ch.len == 0 || ch[0] == 10 {
 			break
 		}
 		res << ch
