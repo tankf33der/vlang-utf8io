@@ -18,7 +18,7 @@ pub fn to_arrays(pattern string) [][]u8 {
 	if pattern.len > 0 {
 		for {
 			// protection
-			if start == pattern.len {
+			if start >= pattern.len {
 				break
 			}
 			// work
@@ -38,7 +38,6 @@ pub fn (mut u Utf8io) open(path string) {
 fn (mut u Utf8io) one_char(seek_flag bool) ![]u8 {
 	mut res := []u8{cap: 4}
 	res << u.f.read_u8() or {
-		// u.eof = true
 		return res
 	}
 	count := u64(utf8_char_len(res[0]))
