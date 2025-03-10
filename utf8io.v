@@ -37,9 +37,7 @@ pub fn (mut u Utf8io) open(path string) {
 @[inline]
 fn (mut u Utf8io) one_char(seek_flag bool) ![]u8 {
 	mut res := []u8{cap: 4}
-	res << u.f.read_u8() or {
-		return res
-	}
+	res << u.f.read_u8() or { return res }
 	count := u64(utf8_char_len(res[0]))
 	for _ in 0 .. count - 1 {
 		res << u.f.read_u8()!
@@ -97,7 +95,7 @@ pub fn (mut u Utf8io) read_till(pattern string) ![]u8 {
 		}
 	}
 	u.f.seek(pos_loop, .start)!
-	if again_flag {			// not equal
+	if again_flag { // not equal
 		res << u.read_char()!
 		unsafe {
 			goto again
@@ -111,8 +109,8 @@ pub fn (mut u Utf8io) read_from(pattern string) ![]u8 {
 	mut res := []u8{}
 	mut last_len := 0
 	patt_bytes := to_arrays(pattern)
-again:
-	for {
+
+	again: for {
 		ch := u.read_char()!
 		last_len = ch.len
 		if ch.len == 0 || ch == patt_bytes[0] {
@@ -135,13 +133,13 @@ again:
 		}
 		res << ch
 	}
-	if again_flag {		// not eqaul
+	if again_flag { // not eqaul
 		res.clear()
 		unsafe {
 			goto again
 		}
 	}
-exit:
+	exit:
 	return res
 }
 

@@ -45,10 +45,10 @@ fn test_read_from3_1() {
 fn test_read_from4_1() {
 	mut u := Utf8io{}
 	u.open('./testdata/readfrom4.dat')
-	res := u.read_from('val=\'')!
-	assert res.bytestr() == 'val=\''
+	res := u.read_from("val='")!
+	assert res.bytestr() == "val='"
 	assert u.peek_char()!.bytestr() == 'a'
-	assert u.read_till('\'')!.bytestr() == 'abc'
+	assert u.read_till("'")!.bytestr() == 'abc'
 	u.close()
 }
 
