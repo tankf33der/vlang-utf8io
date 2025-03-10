@@ -25,3 +25,11 @@ fn test_twoline() {
 	u.close()
 	unsafe { u.free() }
 }
+
+fn test_zero_line() {
+	mut u := Utf8io{}
+	u.open('./testdata/zero.dat')
+	mut line := u.read_line()!
+	assert line == []
+	u.close()
+}
